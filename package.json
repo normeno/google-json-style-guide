@@ -1,0 +1,50 @@
+{
+  "name": "google-json-style-guide",
+  "version": "1.0.0",
+  "description": "Format responses with Google Json Style Guide",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run && npm run build-ts && npm run lint",
+    "build-ts": "tsc",
+    "debug": "npm run build && npm run watch-debug",
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "serve": "node dist/app.js",
+    "serve-debug": "nodemon --inspect dist/app.js",
+    "start": "npm run serve",
+    "test": "jest --forceExit --coverage --verbose",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
+    "watch-node": "nodemon dist/app.js",
+    "watch-test": "npm run test -- --watchAll",
+    "watch-ts": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/normeno/google-json-style-guide.git"
+  },
+  "keywords": [
+    "api",
+    "google",
+    "json",
+    "response"
+  ],
+  "author": "Nicolás Ormeño <ni.ormeno@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/normeno/google-json-style-guide/issues"
+  },
+  "homepage": "https://github.com/normeno/google-json-style-guide#readme",
+  "devDependencies": {
+    "@types/concurrently": "^5.2.1",
+    "@types/eslint": "^7.2.4",
+    "@types/jest": "^26.0.15",
+    "@types/nodemon": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "eslint": "^7.12.1",
+    "jest": "^26.6.2",
+    "nodemon": "^2.0.6",
+    "ts-jest": "^26.4.3",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.5"
+  }
+}

@@ -11,7 +11,7 @@
     "serve": "node dist/app.js",
     "serve-debug": "nodemon --inspect dist/app.js",
     "start": "npm run serve",
-    "test": "jest --forceExit --coverage --verbose",
+    "test": "jest --forceExit --coverage --verbose false",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
     "watch-node": "nodemon dist/app.js",
@@ -51,6 +51,9 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
-    "@babel/preset-typescript": "^7.12.1"
+    "@babel/preset-typescript": "^7.12.1",
+    "@types/lodash": "^4.14.165",
+    "dayjs": "^1.9.6",
+    "lodash": "^4.17.20"
   }
 }

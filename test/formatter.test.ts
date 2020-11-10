@@ -145,8 +145,11 @@ describe('dateTimeToRFC3339', () => {
 });
 
 test('formatAll', () => {
+  const datetime = '2020-11-10';
+  const formattedDatetime = dateTimeToRFC3339(datetime, 'YYYY-MM-DD');
+
   const data: {[k: string]: any} = {
-    updated: '2020-11-10 10:10:10',
+    updated: datetime,
     'null': null,
     'undefined': undefined,
     'empty': '',
@@ -156,7 +159,7 @@ test('formatAll', () => {
     'foo_3': 'foo3',
     'foo_4': 'foo4',
     andObject: {
-      updated: '2020-11-10 10:10:10',
+      updated: datetime,
       'null': null,
       'undefined': undefined,
       'empty': '',
@@ -169,14 +172,14 @@ test('formatAll', () => {
   };
 
   const expected: {[k: string]: any} = {
-    updated: '2020-11-10T13:10:10.000Z',
+    updated: formattedDatetime,
     foo: 'bar',
     fooFoo1: 'barBar1',
     fooFoo2: 'barBar2',
     foo3: 'foo3',
     foo4: 'foo4',
     andObject: {
-      updated: '2020-11-10T13:10:10.000Z',
+      updated: formattedDatetime,
       foo: 'bar',
       fooFoo1: 'barBar1',
       fooFoo2: 'barBar2',

@@ -1,6 +1,6 @@
 # Google JSON Style Guide
 
-[![Build Status][ico-travis]][link-travis]
+![Build Status][ico-travis]
 
 Google JSON Style Guide is a NPM library to work under the Google Json Style Guide standard.
 

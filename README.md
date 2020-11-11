@@ -7,6 +7,8 @@
 
 Google JSON Style Guide is a NPM library to work under the Google Json Style Guide standard.
 
+* NOT USED - IN DEVELOPMENT
+
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://travis-ci.com/normeno/google-json-style-guide.svg?branch=main
 [ico-npm]: https://img.shields.io/npm/v/google-json-style-guide.svg?style=flat-square

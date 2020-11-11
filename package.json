@@ -4,19 +4,9 @@
   "description": "Format responses with Google Json Style Guide",
   "main": "app.js",
   "scripts": {
-    "build": "npm run && npm run build-ts && npm run lint",
-    "build-ts": "tsc",
-    "debug": "npm run build && npm run watch-debug",
-    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
-    "serve": "node dist/app.js",
-    "serve-debug": "nodemon --inspect dist/app.js",
-    "start": "npm run serve",
-    "test": "jest --forceExit --coverage --verbose false",
-    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
-    "watch-node": "nodemon dist/app.js",
-    "watch-test": "npm run test -- --watchAll",
-    "watch-ts": "tsc -w"
+    "build": "tsc",
+    "prepare": "npm run build",
+    "test": "jest --forceExit --coverage --verbose false"
   },
   "repository": {
     "type": "git",

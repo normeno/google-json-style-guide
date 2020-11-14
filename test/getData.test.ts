@@ -8,18 +8,23 @@ const gjsonResponse = new GjsonResponse(apiVersion, context);
 test('one', () => {
   const data: {[k: string]: any} = {
     id: 2,
-    email: "nicolas@ormeno.com",
-    firstName: "Nicolas",
+    Email: "nicolas@ormeno.com",
+    "first-Name": "Nicolas",
     lastName: "Ormeno"
   };
 
-  const response: IOneResponse = gjsonResponse.one(data);
-  
   const expected: IOneResponse = {
     apiVersion,
     context,
-    data
+    data: {
+      id: 2,
+      email: "nicolas@ormeno.com",
+      firstName: "Nicolas",
+      lastName: "Ormeno"
+    }
   }
+
+  const response: IOneResponse = gjsonResponse.one(data);
 
   expect(response).toEqual(expected);
 });
@@ -35,9 +40,9 @@ test('list', () => {
     items: [{
       id: 1,
       name: "cerulean",
-      year: 2000,
+      Year: 2000,
       color: "#98B2D1",
-      pantoneValue: "15-4020"
+      PantoneValue: "15-4020"
     },
     {
       id: 2,
@@ -53,7 +58,28 @@ test('list', () => {
   const expected: IListResponse = {
     apiVersion,
     context,
-    data
+    data: {
+      totalItems: 100,
+      itemsPerPage: 10,
+      totalPages: 10,
+      previousLink: "https.//previous.link",
+      selfLink: "https.//self.link",
+      nextLink: "https.//next.link",
+      items: [{
+        id: 1,
+        name: "cerulean",
+        year: 2000,
+        color: "#98B2D1",
+        pantoneValue: "15-4020"
+      },
+      {
+        id: 2,
+        name: "fuchsia rose",
+        year: 2001,
+        color: "#C74375",
+        pantoneValue: "17-2031"
+      }]
+    }
   }
 
   expect(response).toEqual(expected);

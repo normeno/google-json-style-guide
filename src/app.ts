@@ -9,6 +9,8 @@ import {
   IListResponse
 } from './interfaces/IResponses';
 
+import * as formatter from './formatter';
+
 class App {
   apiVersion: string;
   context: string;
@@ -60,17 +62,20 @@ class App {
     return {
       apiVersion: this.apiVersion,
       context: this.context,
-      data
+      data: this.format().formatAll(data)
     }
   }
 
   list(data: IListData) : IListResponse {
+    data.items = this.format().formatAll(data.items);
     return {
       apiVersion: this.apiVersion,
       context: this.context,
-      data
+      data: data
     }
   }
+
+  format = () => formatter;
 }
 
 export = App;

@@ -31,7 +31,26 @@ const gjsonResponse = new GjsonResponse(apiVersion, context);
 
 ## Responses
 
-### One item
+### List
+
+```js
+const resulsts = {};
+
+const data = {
+    totalItems: 40,
+    itemsPerPage: 10,
+    totalPages: 4,
+    previousLink: "https://my.url?page=1",
+    selfLink: "https://my.url?page=2",
+    nextLink: "https://my.url?page=3",
+    items: results
+};
+
+res.json(gjsonResponse.list(data));
+```
+
+
+### item
 
 ```js
 const data = {

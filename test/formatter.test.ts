@@ -1,10 +1,9 @@
 import _ from 'lodash';
-import {
-  toCamelCase,
-  removeByValue,
-  dateTimeToRFC3339,
-  formatAll
-} from '../src/formatter';
+import GjsonResponse from '../src/app';
+
+const apiVersion: string = "1.0";
+const context: string = "Formatter Tests";
+const gjsonResponse = new GjsonResponse(apiVersion, context);
 
 describe('toCamelCase', () => {
   var data: {[k: string]: any};
@@ -13,37 +12,37 @@ describe('toCamelCase', () => {
   test('Upper', () => {
     data = {'Key': 'value'};
     expected = {'key': 'value'};
-    expect(toCamelCase(data)).toEqual(expected);
+    expect(gjsonResponse.format().toCamelCase(data)).toEqual(expected);
   });
 
   test('Lower', () => {
     data = {'key': 'value'};
     expected = {'key': 'value'};
-    expect(toCamelCase(data)).toEqual(expected);
+    expect(gjsonResponse.format().toCamelCase(data)).toEqual(expected);
   });
 
   test('Camel', () => {
     data = {'keyKey': 'value'};
     expected = {'keyKey': 'value'};
-    expect(toCamelCase(data)).toEqual(expected);
+    expect(gjsonResponse.format().toCamelCase(data)).toEqual(expected);
   });
 
   test('Pascal', () => {
     data = {'KeyKey': 'value'};
     expected = {'keyKey': 'value'};
-    expect(toCamelCase(data)).toEqual(expected);
+    expect(gjsonResponse.format().toCamelCase(data)).toEqual(expected);
   });
 
   test('Underscore', () => {
     data = {'Key_1': 'value'};
     expected = {'key1': 'value'};
-    expect(toCamelCase(data)).toEqual(expected);
+    expect(gjsonResponse.format().toCamelCase(data)).toEqual(expected);
   });
 
   test('Dash', () => {
     data = {'key-1': 'value'};
     expected = {'key1': 'value'};
-    expect(toCamelCase(data)).toEqual(expected);
+    expect(gjsonResponse.format().toCamelCase(data)).toEqual(expected);
   });
 });
 
@@ -55,7 +54,7 @@ describe('removeByValue', () => {
     data = {'key': null};
     expected = {};
 
-    if (removeByValue(data['key'])) {
+    if (gjsonResponse.format().removeByValue(data['key'])) {
       delete data['key'];
     }
   
@@ -66,7 +65,7 @@ describe('removeByValue', () => {
     data = {'key': ''};
     expected = {};
   
-    if (removeByValue(data['key'])) {
+    if (gjsonResponse.format().removeByValue(data['key'])) {
       delete data['key'];
     }
   
@@ -77,7 +76,7 @@ describe('removeByValue', () => {
     data = {'key': undefined};
     expected = {};
   
-    if (removeByValue(data['key'])) {
+    if (gjsonResponse.format().removeByValue(data['key'])) {
       delete data['key'];
     }
   
@@ -88,7 +87,7 @@ describe('removeByValue', () => {
     data = {'key': 'value'};
     expected = {'key': 'value'};
   
-    if (removeByValue(data['key'])) {
+    if (gjsonResponse.format().removeByValue(data['key'])) {
       delete data['key'];
     }
   
@@ -99,46 +98,46 @@ describe('removeByValue', () => {
 describe('dateTimeToRFC3339', () => {
   describe('Without Format', () => {
     test('YYYY-MM-DD', () => {
-      const datetime = dateTimeToRFC3339('2020-10-31');
+      const datetime = gjsonResponse.format().dateTimeToRFC3339('2020-10-31');
       expect(datetime).not.toBe(null);
     });
   
     test('YYYY-MM-DD HH:mm:ss', () => {
-      const datetime = dateTimeToRFC3339('2020-10-31 01:02:03');
+      const datetime = gjsonResponse.format().dateTimeToRFC3339('2020-10-31 01:02:03');
       expect(datetime).not.toBe(null);
     });
   });
   
   describe('With Format', () => {
     test('YYYY-MM-DD', () => {
-      const datetime = dateTimeToRFC3339('2020-10-31', 'YYYY-MM-DD');
+      const datetime = gjsonResponse.format().dateTimeToRFC3339('2020-10-31', 'YYYY-MM-DD');
       expect(datetime).not.toBe(null);
     });
   
     test('YYYY-MM-DD HH:mm:ss', () => {
-      const datetime = dateTimeToRFC3339('2020-10-31 01:02:03', 'YYYY-MM-DD HH:mm:ss');
+      const datetime = gjsonResponse.format().dateTimeToRFC3339('2020-10-31 01:02:03', 'YYYY-MM-DD HH:mm:ss');
       expect(datetime).not.toBe(null);
     });
   
     test('DD-MM-YYYY', () => {
-      const datetime = dateTimeToRFC3339('31-10-2020', 'DD-MM-YYYY');
+      const datetime = gjsonResponse.format().dateTimeToRFC3339('31-10-2020', 'DD-MM-YYYY');
       expect(datetime).not.toBe(null);
     });
   
     test('DD-MM-YYYY HH:mm:ss', () => {
-      const datetime = dateTimeToRFC3339('31-10-2020 01:02:03', 'DD-MM-YYYY HH:mm:ss');
+      const datetime = gjsonResponse.format().dateTimeToRFC3339('31-10-2020 01:02:03', 'DD-MM-YYYY HH:mm:ss');
       expect(datetime).not.toBe(null);
     });
   });
 
   describe('Invalid Formats', () => {
     test('DD-MM-YYYY', () => {
-      const datetime = dateTimeToRFC3339('31-10-2020');
+      const datetime = gjsonResponse.format().dateTimeToRFC3339('31-10-2020');
       expect(datetime).toBe(null);
     });
 
     test('DD-MM-YYYY', () => {
-      const datetime = dateTimeToRFC3339('2020-10-31', 'DD-MM-YYYY');
+      const datetime = gjsonResponse.format().dateTimeToRFC3339('2020-10-31', 'DD-MM-YYYY');
       expect(datetime).toBe(null);
     });
   });
@@ -146,10 +145,10 @@ describe('dateTimeToRFC3339', () => {
 
 test('formatAll', () => {
   const datetime = '2020-11-10';
-  const formattedDatetime = dateTimeToRFC3339(datetime, 'YYYY-MM-DD');
+  const formattedDatetime = gjsonResponse.format().dateTimeToRFC3339(datetime, 'YYYY-MM-DD');
 
   const data: {[k: string]: any} = {
-    updated: datetime,
+    updated: formattedDatetime,
     'null': null,
     'undefined': undefined,
     'empty': '',
@@ -159,7 +158,7 @@ test('formatAll', () => {
     'foo_3': 'foo3',
     'foo_4': 'foo4',
     andObject: {
-      updated: datetime,
+      updated: formattedDatetime,
       'null': null,
       'undefined': undefined,
       'empty': '',
@@ -188,6 +187,6 @@ test('formatAll', () => {
     }
   };
   
-  const formattedData = formatAll(data);
+  const formattedData = gjsonResponse.format().formatAll(data);
   expect(formattedData).toEqual(expected);
 });

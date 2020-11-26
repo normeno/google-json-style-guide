@@ -62,13 +62,6 @@ let formatAll = (data: {[k: string]: any}) : any => {
       if (removeByValue(value)) {
         delete data[key];
       }
-
-      if (value && value.length > 8) {
-        const formattedDate = dateTimeToRFC3339(value);
-        if (formattedDate) {
-          data[key] = formattedDate;
-        }
-      }
     }
   });
 

@@ -29,12 +29,40 @@ const context = "My Context";
 const gjsonResponse = new GjsonResponse(apiVersion, context);
 ```
 
+## Parse
+
+### Dates
+
+_* Dates are not automatically transformed_
+
+```js
+gjsonResponse.format().dateTimeToRFC3339('31-10-2020', 'DD-MM-YYYY');
+```
+
+### Camel Case
+
+```js
+gjsonResponse.format().toCamelCase(data)
+```
+
+### Remove empty, null and undefined
+
+```js
+gjsonResponse.format().removeByValue(data['key'])
+```
+
+### Parse all response (Except dates)
+
+```js
+gjsonResponse.format().formatAll(data);
+```
+
 ## Responses
 
 ### List
 
 ```js
-const resulsts = {};
+const results = {};
 
 const data = {
     totalItems: 40,
@@ -73,6 +101,16 @@ const data = {
 
 res.status(404).json(gjsonResponse.error(data));
 ```
+
+### Stored/Updated/Deleted
+
+```js
+res.json(gjsonResponse.store(true));
+res.json(gjsonResponse.update(true));
+res.json(gjsonResponse.delete(true));
+```
+
+
 
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://travis-ci.com/normeno/google-json-style-guide.svg?branch=main

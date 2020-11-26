@@ -75,7 +75,9 @@ class App {
     }
   }
 
-  format = () => formatter;
+  format() {
+    return formatter;
+  }
 }
 
 export = App;
